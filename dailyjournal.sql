@@ -54,3 +54,4 @@ SELECT * FROM Tag;
 SELECT * FROM EntryTag;
 
 INSERT INTO `Entry` VALUES (null, '2020-08-25', "API, fetch calls", 1);
+INSERT INTO `Entry` VALUES (null, '2020-08-25', "API, fetch calls", 1);
