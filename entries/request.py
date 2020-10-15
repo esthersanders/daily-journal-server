@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from models import Entry
+from models import Entry, Mood
 
 def get_all_entries():
     # Open a connection to the database
@@ -54,8 +54,10 @@ def get_single_entry(id):
             e.id,
             e.date,
             e.entry,
-            e.mood_id
+            e.mood_id,
+            m.label
         FROM entry e
+        JOIN mood m ON m.id = e.mood_id
         WHERE e.id = ?
         """, ( id, ))
 
@@ -65,6 +67,8 @@ def get_single_entry(id):
         # Create an animal instance from the current row
         entry = Entry(data['id'], data['date'], data['entry'],
                             data['mood_id'])
+        mood = Mood("", data['label'])
+        entry.mood = mood.__dict__
 
         return json.dumps(entry.__dict__)
 
